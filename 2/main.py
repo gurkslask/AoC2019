@@ -32,7 +32,7 @@ def calcAdv(stringen ):
     for noun in range(0,100):
         for verb in range(0,100):
             i = 0
-            l = ll
+            l = ll.copy()
             done = False
             l[1] = noun
             l[2] = verb
@@ -45,13 +45,11 @@ def calcAdv(stringen ):
                     done = True
                 elif l[i] == 2:
                     # print("{} = {} + {}".format(l[l[c+3]],l[l[c+1]], l[l[c+2]] ))
-                    print(l)
-                    print(i)
-                    print(l[i+3] , l[i+1] ,l[i+2] )
                     l[l[i+3]] = l[l[i+1]] *l[l[i+2]] 
                 # print("Efter loop: ", l)
                 i += 4
-            print(l[0])
+            if l[0] == 19690720:
+                print(l[1] * 100 +  l[2])
 
     print(l)
     return l[0]
