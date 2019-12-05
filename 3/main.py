@@ -1,5 +1,5 @@
 def taxi(p1, p2, q1, q2):
-    res = ( p1-q1 ) + (p2-q2)
+    res =abs((p1-q1)) + abs((p2-q2))
     return res
 
 def calc(string1, string2):
@@ -60,6 +60,7 @@ def calc(string1, string2):
     for i in mapp1:
         if i in mapp2:
             overlap[taxi(i[0],i[1],0,0)] = i
+            print(overlap)
 
     return min(overlap)
 
