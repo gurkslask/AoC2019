@@ -66,6 +66,7 @@ def calc(string1, string2):
 
 
 def calcAdv(string1, string2):
+    print("\nCalcadvance")
     mapp1 = []
     mapp2 = []
     mapp = []
@@ -77,28 +78,32 @@ def calcAdv(string1, string2):
     def moveright(m, org_pos, move, steps):
         cur_pos = org_pos
         for i in range( move ):
-            cur_pos = (cur_pos[0] + 1, cur_pos[1]) 
+            steps += 1
+            cur_pos = (cur_pos[0] + 1, cur_pos[1], steps) 
             m.append(cur_pos)
-        return m, cur_pos
+        return m, cur_pos, steps
     
-    def moveleft(m, org_pos, move):
+    def moveleft(m, org_pos, move,steps):
         cur_pos = org_pos
         for i in range( move ):
-            cur_pos = (cur_pos[0] - 1, cur_pos[1]) 
+            steps += 1
+            cur_pos = (cur_pos[0] - 1, cur_pos[1], steps) 
             m.append(cur_pos)
-        return m, cur_pos
-    def moveup(m, org_pos, move):
+        return m, cur_pos, steps
+    def moveup(m, org_pos, move,steps):
         cur_pos = org_pos
         for i in range( move ):
-            cur_pos = (cur_pos[0], cur_pos[1] + 1) 
+            steps += 1
+            cur_pos = (cur_pos[0], cur_pos[1] + 1, steps) 
             m.append(cur_pos)
-        return m, cur_pos
-    def movedown(m, org_pos, move):
+        return m, cur_pos, steps
+    def movedown(m, org_pos, move,steps):
         cur_pos = org_pos
         for i in range( move ):
-            cur_pos = (cur_pos[0], cur_pos[1] - 1) 
+            steps += 1
+            cur_pos = (cur_pos[0], cur_pos[1] - 1, steps) 
             m.append(cur_pos)
-        return m, cur_pos
+        return m, cur_pos, steps
     d = {
             "R": moveright,
             "U": moveup,
@@ -110,26 +115,27 @@ def calcAdv(string1, string2):
     # print(string1, string2)
     for i in string1:
         moven = int(i[1:])
-        mapp, curr_pos = d[i[0]](mapp, curr_pos, moven)
+        mapp, curr_pos, steps = d[i[0]](mapp, curr_pos, moven, steps)
         
     mapp1 = mapp
     mapp = []
     curr_pos = (0, 0)
+    steps = 0
     for i in string2:
         moven = int(i[1:])
-        mapp, curr_pos = d[i[0]](mapp, curr_pos, moven)
+        mapp, curr_pos, steps = d[i[0]](mapp, curr_pos, moven, steps)
     mapp2 = mapp
-    # print("här kommer mapparna", mapp1,"2an\n",  mapp2)
-    overlap = {}
+    overlap = []
     for i in mapp1:
-        if i in mapp2:
-            overlap[taxi(i[0],i[1],0,0)] = i
-            print(overlap)
+        for u in mapp2:
+            if i[0] == u[0] and i[1] == u[1]:
+                overlap.append(i[2]+u[2])
+                print("overlap, ", overlap)
 
     return min(overlap)
 if __name__ == "__main__":
     with open("input.txt", 'r') as f:
         d = f.readlines()
-        print(calc(d[0], d[1]))
+        print(calcAdv(d[0], d[1]))
 
 
