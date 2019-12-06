@@ -19,32 +19,33 @@ def calcAdv(number):
     rise = True
     number = str(number)
     removed = True
+    for pos, tal in enumerate(number):
+        tal = int(tal)
+        try:
+            if tal > int(  number[pos+1] ):
+                rise = False
+        except IndexError:
+            pass
+
     while removed:
         removed = False
-        for pos, tal in enumerate(  number  ):
+        for pos, tal in enumerate(number):
             tal = int(tal)
-            if pos < 5:
-                try:
-                    if tal == int( number[pos+1] ):
-                        c = 0
-                        for i in number[pos:]:
-                            if int(i) == tal:
-                                c += 1
-                            else:
-                                break
-                        if c == 2:
-                            same = True
-                        if c > 2:
-                            number = number.replace(number[pos:pos+c], '')
-                            removed = True
-                except IndexError:
-                    pass
-
-                try:
-                    if tal > int(  number[pos+1] ):
-                        rise = False
-                except IndexError:
-                    pass
+            try:
+                if tal == int( number[pos+1] ):
+                    c = 0
+                    for i in number[pos:]:
+                        if int(i) == tal:
+                            c += 1
+                        else:
+                            break
+                    if c == 2:
+                        same = True
+                    if c > 2:
+                        number = number.replace(number[pos:pos+c], '')
+                        removed = True
+            except IndexError:
+                pass
 
     return same and rise
 
