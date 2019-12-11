@@ -3,12 +3,13 @@ import main
 
 class TestMain(unittest.TestCase):
     def test_2(self):
-        self.assertEqual(main.calc("10101,2,1,0,99"), 4)
-        self.assertEqual(main.calc("11101,4,4,0,99"), 8)
-        self.assertEqual(main.calc("10001,2,1,0,99"), 3)
-        self.assertEqual(main.calc("10002,2,1,0,99"), 2)
-        self.assertEqual(main.calc("11102,8,5,0,99"), 40)
-        self.assertEqual(main.calc("103,2,9,0,1,3,99"), 105)
+        # self.assertEqual(main.calc("10101,2,1,0,99"), 4)
+        # self.assertEqual(main.calc("11101,4,4,0,99"), 8)
+        # self.assertEqual(main.calc("10001,2,1,0,99"), 3)
+        # self.assertEqual(main.calc("10002,2,1,0,99"), 2)
+        # self.assertEqual(main.calc("11102,8,5,0,99"), 40)
+        # self.assertEqual(main.calc("103,2,9,0,1,3,99"), 105)
+        self.assertEqual(main.calc("3,9,8,9,10,9,4,9,99,-1,8", 8), 1)
 
 if __name__ == "__main__":
     unittest.main()
