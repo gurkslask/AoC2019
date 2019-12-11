@@ -8,6 +8,7 @@ class TestMain(unittest.TestCase):
         self.assertEqual(main.calc("10001,2,1,0,99"), 3)
         self.assertEqual(main.calc("10002,2,1,0,99"), 2)
         self.assertEqual(main.calc("11102,8,5,0,99"), 40)
+        self.assertEqual(main.calc("103,2,9,0,1,3,99"), 105)
 
 if __name__ == "__main__":
     unittest.main()
