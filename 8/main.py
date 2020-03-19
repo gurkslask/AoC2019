@@ -15,7 +15,7 @@ def calc(inp, inpx, inpy, result):
     layers =  int(len(inp)/(inpx * inpy) )
     # print(layers)
     # print(len(inp))
-    ll = [[[inp[col + (row * inpx) + (layer * ( inpx + inpy +1 ))] for col in range(inpx)] for row in range(inpy)] for layer in range(layers)]
+    ll = [[[inp[col + (row * inpx) + (layer * ( inpx + inpy  ))] for col in range(inpx)] for row in range(inpy)] for layer in range(layers)]
 
     # Setup be4 comparison
     smallestocc = 999999
@@ -34,23 +34,30 @@ def calc(inp, inpx, inpy, result):
         return ll
 
 def genimg(lista, inpx, inpy):
+    print("lista: ", lista)
     img = [["2" for col in range(inpx)] for row in range( inpy )]
-    print(img)
+    print("\nInit img: ", img)
+    i = 0
     for row in range(inpy):
         for col in range(inpx):
             for layer in range(len(lista)):
                 color = lista[layer][row][col]
-                if color != 2:
+                print(i, color, row, col)
+                i+=1
+                # if color != 2 and img[row][col] == 2:
+                if color != "2" and img[row][col] == "2":
+                    print("dnsjkandksa",color)
                     img[row][col]=color
-                    break
-    print(img)
+    print("\nDone img: ", img)
     with open("out.txt", "w") as f:
         for row in img:
             for col in row:
                 if col == "0":
-                    f.write(" ")
+                    f.write("0")
                 if col == "1":
                     f.write("#")
+                if col == "2":
+                    f.write("r")
             f.write("\n")
     return img
 
@@ -58,4 +65,4 @@ def genimg(lista, inpx, inpy):
 if __name__ == "__main__":
     with open("input.txt", 'r') as f:
         d = f.read()
-        print(genimg(calc(d, 25, 6), 25, 6))
+        print(genimg(calc(d, 25, 6, False), 25, 6))
